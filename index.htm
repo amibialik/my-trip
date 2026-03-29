@@ -37,7 +37,6 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            /* רקע כחול חצות עמוק כדי ששמי הכוכבים יבלטו */
             background-color: #1a1a1a; 
         }
 
@@ -60,7 +59,7 @@
         .header-overlay {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.8)); /* הצללה עמוקה יותר */
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.8));
             z-index: -1;
         }
 
@@ -78,7 +77,6 @@
             z-index: 2;
         }
 
-        /* --- חלק חדש: הציטוט המלא והמדויק --- */
         .quote-section {
             text-align: center;
             margin-bottom: 50px;
@@ -88,18 +86,19 @@
 
         .quote-content {
             font-family: 'Abhaya Libre', serif;
-            font-size: 1.4em;
+            font-size: 1.45em;
             color: #5d4037;
-            line-height: 2;
+            line-height: 2.1;
             max-width: 750px;
             margin: 0 auto;
+            font-style: italic;
         }
 
         .quote-source {
             font-size: 1.1em;
             color: var(--accent-color);
             margin-top: 25px;
-            font-weight: 400;
+            font-weight: 700;
         }
 
         .map-wrapper {
@@ -112,8 +111,8 @@
             box-shadow: 0 15px 40px rgba(0,0,0,0.07);
         }
 
-        /* הכתובת התקינה למפה שלך הוטמעה כאן */
-        .map-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; filter: sepia(15%); }
+        /* המפה שלך עודכנה לקישור הרשמי מהתמונה ששלחת */
+        .map-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
 
         .legend-section { background-color: #fdfaf5; padding: 25px; border: 1px solid #f0e6d6; margin-bottom: 50px; }
         .legend-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; text-align: center; }
@@ -124,7 +123,7 @@
         .color-orange { background-color: var(--difficulty-medium); }
         .color-red { background-color: var(--difficulty-hard); }
 
-        h2 { border-bottom: 2px solid var(--accent-color); display: inline-block; padding-bottom: 8px; margin-top: 40px; font-size: 2em; }
+        h2 { border-bottom: 2px solid var(--accent-color); display: inline-block; padding-bottom: 8px; margin-top: 40px; font-size: 2.2em; }
 
         .timeline { position: relative; margin: 40px auto; padding: 0 50px 0 0; max-width: 700px; }
         .timeline::after { content: ''; position: absolute; width: 3px; background-color: var(--accent-color); top: 20px; bottom: 20px; right: 0; opacity: 0.4; }
@@ -143,16 +142,14 @@
             margin-right: 30px; transition: 0.3s;
         }
 
-        .timeline-content:hover { transform: translateY(-3px); }
-
         .timeline-content h3 { margin: 0 0 12px 0; color: var(--primary-color); font-size: 1.45em; }
         .timeline-content p { margin: 0; color: #5d4037; font-weight: 300; }
 
         footer { text-align: center; padding: 70px; color: #8d6e63; font-size: 0.9em; background-color: #e6dace; margin-top: 60px; }
 
         @media (max-width: 600px) {
-            h1 { font-size: 3.2em; }
-            header p { font-size: 1.3em; }
+            h1 { font-size: 3em; }
+            header p { font-size: 1.2em; }
             .container { margin: -40px 15px 40px; padding: 30px 25px; }
             .legend-grid { grid-template-columns: 1fr; }
             .quote-content { font-size: 1.25em; line-height: 1.8; }
@@ -164,7 +161,7 @@
 <header>
     <div class="slideshow-container">
         <img src="https://images.unsplash.com/photo-1542841639-6617c6676ffb?q=80&w=2000" class="active" alt="Milky Way Campfire">
-        <img src="https://images.unsplash.com/photo-1542318218-c0b82eb4b791?q=80&w=2000" alt="Starry Night Canyon Camp">
+        <img src="https://images.unsplash.com/photo-1542318218-c0b82eb4b791?q=80&w=2000" alt="Starry Night Canyon">
         <img src="https://images.unsplash.com/photo-1473580044384-7ba9967e16a0?q=80&w=2000" alt="Deep Desert Stargazing">
     </div>
     <div class="header-overlay"></div>
@@ -176,7 +173,7 @@
     
     <section class="quote-section">
         <div class="quote-content">
-            "...יפה הוא המדבר... אמר הנסיך הקטן, תמיד אהבתי את המדבר, ואתה יושב לך על גבעת חול ואינך רואה דבר ואינך שומע דבר ואף על פי כן משהו קורן ומאיר בדממה... סוד קסמו של המדבר, העיר הנסיך הקטן הוא שהוא טומן בחובו אי שם מקור מים חיים..."
+            "יפה הוא המדבר... אמר הנסיך הקטן, תמיד אהבתי את המדבר, ואתה יושב לך על גבעת חול ואינך רואה דבר ואינך שומע דבר ואף על פי כן משהו קורן ומאיר בדממה... סוד קסמו של המדבר, העיר הנסיך הקטן הוא שהוא טומן בחובו אי שם מקור מים חיים..."
         </div>
         <div class="quote-source">
             הנסיך הקטן / אנטואן דה סנט אקזופרי
@@ -185,71 +182,9 @@
 
     <h2>📍 מפת הנתיב</h2>
     <div class="map-wrapper">
-        <iframe src="https://www.google.com/maps/d/embed?mid=YOUR_MAP_ID_HERE" width="100%" height="480"></iframe>
+        <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1fHnz3sFeXEwLkTOlyNd_MU31p08ZAFZ8&ehbc=2E312F" width="100%" height="480"></iframe>
     </div>
 
     <section class="legend-section">
         <div class="legend-grid">
-            <div class="legend-item"><div class="color-box color-green"></div><span>נשימה עמוקה (קליל)</span></div>
-            <div class="legend-item"><div class="color-box color-orange"></div><span>קצב המדבר (בינוני)</span></div>
-            <div class="legend-item"><div class="color-box color-red"></div><span>האתגר האמיתי (מאתגר)</span></div>
-        </div>
-    </section>
-
-    <section>
-        <h2>🗓️ ציר הזמן </h2>
-        <div class="timeline">
-            
-            <div class="timeline-item">
-                <div class="timeline-icon">🔥</div>
-                <div class="timeline-content">
-                    <h3>התכנסות באמבטיית הכוכבים - לילה ראשון</h3>
-                    <p>הגעה לשטח,התארגנות ושתיית יין סביב ומדורה אינסופית ורכילות עסיסית. התמסרות לשקט .</p>
-                </div>
-            </div>
-            
-            <div class="timeline-item">
-                <div class="timeline-icon">🚶‍♂️</div>
-                <div class="timeline-content">
-                    <h3>עומק השטח - יום שני</h3>
-                    <p>יוצאים אל הדרך. יום מלא בהליכה , גילוי סוד יופיו של המדבר (ראה מפה).</p>
-                </div>
-            </div>
-            
-            <div class="timeline-item">
-                <div class="timeline-icon">🔥</div>
-                <div class="timeline-content">
-                    <h3>חיבור מחדש סביב הלהבות - לילה שני</h3>
-                    <p>חוזרים למחנה. ארוחת ערב שטח משותפת, סיכום היום, רכילות וסיפורים סביב המדורה המהבהבת.</p>
-                </div>
-            </div>
-            
-            <div class="timeline-item">
-                <div class="timeline-icon">🥾</div>
-                <div class="timeline-content">
-                    <h3>אור אחרון ופרידה - יום שלישי</h3>
-                    <p>בוקר אחרון במכתש למסלול קצר אל אחת הפסגות, פרידה מהנוף בצהריים וחזרה אל הציוויליזציה.</p>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-</div>
-
-<footer>
-    נבנה עבור האודיסיאה המדברית שלכם © פסח 2026
-</footer>
-
-<script>
-    const slides = document.querySelectorAll('.slideshow-container img');
-    let current = 0;
-    setInterval(() => {
-        slides[current].classList.remove('active');
-        current = (current + 1) % slides.length;
-        slides[current].classList.add('active');
-    }, 6000); // מעבר כל 6 שניות
-</script>
-
-</body>
-</html>
+            <div class="legend-item"><div class="
