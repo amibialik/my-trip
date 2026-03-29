@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>פסח 2026 - מכתש רמון - מפה וציר זמן</title>
+    <title>פסח 2026 - מכתש רמון - מפה וציר זמן דינמי</title>
     <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -25,15 +25,60 @@
             line-height: 1.6;
         }
 
+        /* --- עדכון מבנה ה-Header לרקע דינמי --- */
         header {
-            /* תמונת הרקע למכתש רמון (נשמרת) */
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1541819614-f8644558e8b0?q=80&w=2000&auto=format&fit=crop');
-            background-size: cover;
-            background-position: center;
+            position: relative; /* חובה עבור מיקום התמונות */
+            height: 350px; /* גובה קבוע לחלק העליון */
+            overflow: hidden; /* מונע מהתמונות לצאת מהגבולות */
             color: white;
             text-align: center;
-            padding: 70px 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
+
+        /* המיכל של תמונות הרקע */
+        .slideshow-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2; /* ממקם מאחורי הטקסט */
+        }
+
+        /* הגדרות לכל תמונה במצגת */
+        .slideshow-container img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* גורם לתמונה למלא את השטח בלי להתעוות */
+            opacity: 0; /* מתחיל כבלתי נראה */
+            transition: opacity 1.5s ease-in-out; /* אפקט המעבר הרך */
+            z-index: -2;
+        }
+
+        /* התמונה הפעילה כרגע */
+        .slideshow-container img.active {
+            opacity: 1; /* הופך לנראה */
+        }
+
+        /* שכבת הצללה כהה מעל התמונות לקריאות הטקסט */
+        .header-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.6));
+            z-index: -1; /* מעל התמונות, מתחת לטקסט */
+        }
+
+        h1 { margin: 0 0 10px 0; font-size: 2.8em; text-shadow: 0 2px 4px rgba(0,0,0,0.5); position: relative; z-index: 1; }
+        header p { margin: 0; font-size: 1.2em; text-shadow: 0 1px 2px rgba(0,0,0,0.5); position: relative; z-index: 1; }
 
         .container {
             max-width: 1000px;
@@ -42,11 +87,14 @@
             padding: 30px;
             border-radius: 15px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            position: relative; /* שומר על ה-shadow מעל הרקע */
+            z-index: 2;
         }
 
+        /* (שאר העיצובים נשמרים ללא שינוי) */
         .map-wrapper {
             position: relative;
-            padding-bottom: 60%; /* יחס גובה-רוחב */
+            padding-bottom: 60%;
             height: 0;
             overflow: hidden;
             border-radius: 12px;
@@ -63,7 +111,6 @@
             border: 0;
         }
 
-        /* --- עיצוב מקרא (נשמר) --- */
         .legend-section {
             background-color: #fcfcfc;
             padding: 15px;
@@ -94,26 +141,22 @@
             width: 18px;
             height: 18px;
             border-radius: 4px;
-            margin-left: 10px; /* רווח מהטקסט */
+            margin-left: 10px;
         }
 
         .color-green { background-color: var(--difficulty-easy); }
         .color-orange { background-color: var(--difficulty-medium); }
         .color-red { background-color: var(--difficulty-hard); }
 
-        h1 { margin-bottom: 10px; font-size: 2.5em; }
         h2 { border-bottom: 3px solid var(--accent-color); display: inline-block; padding-bottom: 5px; margin-top: 30px; }
-        h3.section-title { margin-top: 0; margin-bottom: 10px; text-align: center; font-size: 1.1em; }
-
-        /* --- עיצוב ציר זמן חדש ומודרני --- */
+        
         .timeline {
             position: relative;
             margin: 30px auto;
-            padding: 0 40px 0 0; /* רווח ימני לקו הראשי */
+            padding: 0 40px 0 0;
             max-width: 700px;
         }
 
-        /* הקו הראשי האנכי של ציר הזמן */
         .timeline::after {
             content: '';
             position: absolute;
@@ -121,7 +164,7 @@
             background-color: var(--accent-color);
             top: 10px;
             bottom: 10px;
-            right: 0; /* קו בצד ימין (מתאים ל-RTL) */
+            right: 0;
             border-radius: 2px;
         }
 
@@ -130,11 +173,10 @@
             margin-bottom: 30px;
         }
 
-        /* העיגול/סמל על ציר הזמן */
         .timeline-icon {
             position: absolute;
             top: 0;
-            right: -18px; /* ממוקם על הקו הימני */
+            right: -18px;
             width: 32px;
             height: 32px;
             background-color: white;
@@ -148,14 +190,13 @@
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
 
-        /* תוכן הפריט בציר הזמן */
         .timeline-content {
             background-color: white;
             padding: 15px 20px;
             border-radius: 8px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.05);
             border: 1px solid #eee;
-            margin-right: 20px; /* רווח מהקו והאייקון */
+            margin-right: 20px;
         }
 
         .timeline-content h3 {
@@ -171,12 +212,11 @@
             font-size: 0.95em;
         }
 
-        /* --- הוסר הציוד חובה לפי הבקשה --- */
-
         footer { text-align: center; padding: 30px; color: #7f8c8d; font-size: 0.9em; }
 
         @media (max-width: 600px) {
-            header { padding: 40px 10px; }
+            header { height: 250px; padding: 20px 10px; }
+            h1 { font-size: 2.2em; }
             .container { margin: -20px 10px 20px; padding: 15px; }
             .map-wrapper { padding-bottom: 100%; }
             .legend-grid { grid-template-columns: 1fr; gap: 8px; }
@@ -189,6 +229,13 @@
 <body>
 
 <header>
+    <div class="slideshow-container">
+        <img src="https://images.unsplash.com/photo-1541819614-f8644558e8b0?q=80&w=2000" class="active" alt="מכתש רמון פנורמה">
+        <img src="https://images.unsplash.com/photo-1629119131653-31f083f982a5?q=80&w=2000" alt="מכתש רמון שקיעה">
+        <img src="https://images.unsplash.com/photo-1629810848882-9659b4c09d5d?q=80&w=2000" alt="מכתש רמון לילה כוכבים">
+    </div>
+    <div class="header-overlay"></div>
+
     <h1>פסח 2026 🌍</h1>
     <p>הולכים לטרוף את מכתש רמון - המפה המלאה!</p>
 </header>
@@ -202,7 +249,7 @@
     </div>
 
     <section class="legend-section">
-        <h3 class="section-title">🧗‍♂️ מקרא דרגות קושי (צבעי מסלול במפה)</h3>
+        <h3 style="margin-top:0; text-align:center;">🧗‍♂️ מקרא דרגות קושי (צבעי מסלול במפה)</h3>
         <div class="legend-grid">
             <div class="legend-item">
                 <div class="color-box color-green"></div>
@@ -222,7 +269,6 @@
     <section>
         <h2>🗓️ לוח זמנים (ציר זמן)</h2>
         <div class="timeline">
-            
             <div class="timeline-item">
                 <div class="timeline-icon">🔥</div>
                 <div class="timeline-content">
@@ -230,7 +276,6 @@
                     <p>הגעה לשטח, התארגנות ומדורה חגיגית תחת הכוכבים.</p>
                 </div>
             </div>
-            
             <div class="timeline-item">
                 <div class="timeline-icon">🚶‍♂️</div>
                 <div class="timeline-content">
@@ -238,7 +283,6 @@
                     <p>יוצאים למסלול (ראה מפה לפי דרגות קושי). ארוחת צהריים בשטח.</p>
                 </div>
             </div>
-            
             <div class="timeline-item">
                 <div class="timeline-icon">🔥</div>
                 <div class="timeline-content">
@@ -246,7 +290,6 @@
                     <p>חוזרים למחנה, ארוחת ערב סביב המדורה וסיכום היום.</p>
                 </div>
             </div>
-            
             <div class="timeline-item">
                 <div class="timeline-icon">🥾</div>
                 <div class="timeline-content">
@@ -254,15 +297,37 @@
                     <p>בוקר אחרון במכתש למסלול קצר, צהריים מתקפלים ונוסעים הביתה.</p>
                 </div>
             </div>
-
         </div>
     </section>
 
-    </div>
+</div>
 
 <footer>
     נבנה עבור הטיול המתוכנן שלכם © 2026
 </footer>
+
+<script>
+    // הגדרת המשתנים
+    const slides = document.querySelectorAll('.slideshow-container img');
+    const slideCount = slides.length;
+    let currentSlide = 0;
+    const slideDuration = 5000; // זמן הצגה לכל תמונה (5 שניות = 5000 מילישניות)
+
+    // פונקציית המעבר
+    function nextSlide() {
+        // הסרת המחלקה 'active' מהתמונה הנוכחית
+        slides[currentSlide].classList.remove('active');
+        
+        // חישוב האינדקס של התמונה הבאה (וחזרה להתחלה אם הגענו לסוף)
+        currentSlide = (currentSlide + 1) % slideCount;
+        
+        // הוספת המחלקה 'active' לתמונה החדשה
+        slides[currentSlide].classList.add('active');
+    }
+
+    // הפעלת פונקציית המעבר באופן מחזורי
+    setInterval(nextSlide, slideDuration);
+</script>
 
 </body>
 </html>
