@@ -3,18 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>פסח 2026 - מכתש רמון - מפה וציר זמן דינמי</title>
-    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;700&display=swap" rel="stylesheet">
+    <title>המסע אל לב המכתש - פסח 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@700&family=Assistant:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #2c3e50;
-            --accent-color: #3498db;
-            --bg-color: #f4f7f6;
-            
-            /* צבעי קושי למקרא (נשמר) */
-            --difficulty-easy: #2ecc71;   /* ירוק */
-            --difficulty-medium: #e67e22; /* כתום */
-            --difficulty-hard: #e74c3c;   /* אדום */
+            --primary-color: #3e2723;
+            --accent-color: #c17753;
+            --bg-color: #f2e8d9;
+            --text-on-dark: #fafafa;
+            --difficulty-easy: #81c784;   
+            --difficulty-medium: #ffb74d; 
+            --difficulty-hard: #e57373;   
         }
 
         body {
@@ -22,15 +21,18 @@
             margin: 0;
             background-color: var(--bg-color);
             color: var(--primary-color);
-            line-height: 1.6;
+            line-height: 1.8;
+            /* טקסטורת חול עדינה ברקע */
+            background-image: url('https://www.transparenttextures.com/patterns/sandpaper.png');
         }
 
-        /* --- עדכון מבנה ה-Header לרקע דינמי --- */
+        h1, h2, h3 { font-family: 'Abhaya Libre', serif; font-weight: 700; }
+
         header {
-            position: relative; /* חובה עבור מיקום התמונות */
-            height: 350px; /* גובה קבוע לחלק העליון */
-            overflow: hidden; /* מונע מהתמונות לצאת מהגבולות */
-            color: white;
+            position: relative;
+            height: 100vh;
+            overflow: hidden;
+            color: var(--text-on-dark);
             text-align: center;
             display: flex;
             flex-direction: column;
@@ -38,191 +40,95 @@
             align-items: center;
         }
 
-        /* המיכל של תמונות הרקע */
         .slideshow-container {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -2; /* ממקם מאחורי הטקסט */
+            top: 0; left: 0; width: 100%; height: 100%; z-index: -2;
         }
 
-        /* הגדרות לכל תמונה במצגת */
         .slideshow-container img {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover; /* גורם לתמונה למלא את השטח בלי להתעוות */
-            opacity: 0; /* מתחיל כבלתי נראה */
-            transition: opacity 1.5s ease-in-out; /* אפקט המעבר הרך */
+            top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 2.5s ease-in-out;
             z-index: -2;
         }
 
-        /* התמונה הפעילה כרגע */
-        .slideshow-container img.active {
-            opacity: 1; /* הופך לנראה */
-        }
+        .slideshow-container img.active { opacity: 1; }
 
-        /* שכבת הצללה כהה מעל התמונות לקריאות הטקסט */
         .header-overlay {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.6));
-            z-index: -1; /* מעל התמונות, מתחת לטקסט */
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.7));
+            z-index: -1;
         }
 
-        h1 { margin: 0 0 10px 0; font-size: 2.8em; text-shadow: 0 2px 4px rgba(0,0,0,0.5); position: relative; z-index: 1; }
-        header p { margin: 0; font-size: 1.2em; text-shadow: 0 1px 2px rgba(0,0,0,0.5); position: relative; z-index: 1; }
+        h1 { margin: 0; font-size: 4.5em; text-shadow: 0 4px 10px rgba(0,0,0,0.7); position: relative; z-index: 1; }
+        header p { margin: 15px 0 0; font-size: 1.5em; text-shadow: 0 2px 4px rgba(0,0,0,0.5); position: relative; z-index: 1; font-weight: 300; }
 
         .container {
-            max-width: 1000px;
-            margin: -40px auto 40px;
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            position: relative; /* שומר על ה-shadow מעל הרקע */
+            max-width: 900px;
+            margin: -80px auto 60px;
+            background: rgba(255, 255, 255, 0.97);
+            padding: 50px;
+            border-radius: 4px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+            position: relative;
             z-index: 2;
         }
 
-        /* (שאר העיצובים נשמרים ללא שינוי) */
+        .the-call { text-align: center; margin-bottom: 50px; font-size: 1.25em; border-bottom: 1px solid #eee; padding-bottom: 40px; }
+        .the-call h2 { font-size: 2.2em; color: var(--accent-color); margin-bottom: 15px; border: none; }
+
         .map-wrapper {
             position: relative;
-            padding-bottom: 60%;
+            padding-bottom: 65%;
             height: 0;
             overflow: hidden;
-            border-radius: 12px;
-            margin: 25px 0 15px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            border: 1px solid #ddd;
+            margin: 30px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
         }
 
-        .map-wrapper iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: 0;
-        }
+        .map-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; filter: sepia(20%); }
 
-        .legend-section {
-            background-color: #fcfcfc;
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 35px;
-            border: 1px solid #eaeaea;
-        }
-
-        .legend-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .legend-item {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 8px;
-            background: white;
-            border-radius: 6px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.03);
-        }
-
-        .color-box {
-            width: 18px;
-            height: 18px;
-            border-radius: 4px;
-            margin-left: 10px;
-        }
+        .legend-section { background-color: #fdfaf5; padding: 25px; border: 1px solid #f0e6d6; margin-bottom: 50px; }
+        .legend-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; text-align: center; }
+        .legend-item { display: flex; align-items: center; justify-content: center; background: white; padding: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .color-box { width: 18px; height: 18px; margin-left: 10px; border-radius: 2px; }
 
         .color-green { background-color: var(--difficulty-easy); }
         .color-orange { background-color: var(--difficulty-medium); }
         .color-red { background-color: var(--difficulty-hard); }
 
-        h2 { border-bottom: 3px solid var(--accent-color); display: inline-block; padding-bottom: 5px; margin-top: 30px; }
-        
-        .timeline {
-            position: relative;
-            margin: 30px auto;
-            padding: 0 40px 0 0;
-            max-width: 700px;
-        }
+        h2 { border-bottom: 2px solid var(--accent-color); display: inline-block; padding-bottom: 8px; margin-top: 40px; font-size: 2em; }
 
-        .timeline::after {
-            content: '';
-            position: absolute;
-            width: 4px;
-            background-color: var(--accent-color);
-            top: 10px;
-            bottom: 10px;
-            right: 0;
-            border-radius: 2px;
-        }
+        .timeline { position: relative; margin: 40px auto; padding: 0 50px 0 0; max-width: 700px; }
+        .timeline::after { content: ''; position: absolute; width: 3px; background-color: var(--accent-color); top: 20px; bottom: 20px; right: 0; opacity: 0.4; }
 
-        .timeline-item {
-            position: relative;
-            margin-bottom: 30px;
-        }
-
+        .timeline-item { position: relative; margin-bottom: 50px; }
         .timeline-icon {
-            position: absolute;
-            top: 0;
-            right: -18px;
-            width: 32px;
-            height: 32px;
-            background-color: white;
-            border: 4px solid var(--accent-color);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 10;
-            font-size: 1.1em;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: absolute; top: 0; right: -21px; width: 40px; height: 40px;
+            background-color: var(--bg-color); border: 2px solid var(--accent-color);
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            z-index: 10; font-size: 1.3em; box-shadow: 0 4px 10px rgba(193, 119, 83, 0.3);
         }
 
         .timeline-content {
-            background-color: white;
-            padding: 15px 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-            border: 1px solid #eee;
-            margin-right: 20px;
+            background-color: white; padding: 25px; border-radius: 4px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05); border-right: 4px solid var(--accent-color);
+            margin-right: 30px; transition: 0.3s;
         }
 
-        .timeline-content h3 {
-            margin: 0 0 5px 0;
-            color: var(--primary-color);
-            font-size: 1.1em;
-            font-weight: 700;
-        }
+        .timeline-content h3 { margin: 0 0 10px 0; color: var(--primary-color); font-size: 1.4em; }
+        .timeline-content p { margin: 0; color: #5d4037; font-weight: 300; }
 
-        .timeline-content p {
-            margin: 0;
-            color: #7f8c8d;
-            font-size: 0.95em;
-        }
-
-        footer { text-align: center; padding: 30px; color: #7f8c8d; font-size: 0.9em; }
+        footer { text-align: center; padding: 60px; color: #8d6e63; font-size: 0.9em; background-color: #e8ddd0; margin-top: 60px; }
 
         @media (max-width: 600px) {
-            header { height: 250px; padding: 20px 10px; }
-            h1 { font-size: 2.2em; }
-            .container { margin: -20px 10px 20px; padding: 15px; }
-            .map-wrapper { padding-bottom: 100%; }
-            .legend-grid { grid-template-columns: 1fr; gap: 8px; }
-            .timeline { padding: 0 25px 0 0; }
-            .timeline-icon { right: -16px; width: 28px; height: 28px; font-size: 1em; }
-            .timeline-content { margin-right: 15px; padding: 12px 15px; }
+            h1 { font-size: 3em; }
+            .container { margin: -40px 15px 40px; padding: 25px; }
+            .legend-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -230,103 +136,81 @@
 
 <header>
     <div class="slideshow-container">
-        <img src="https://images.unsplash.com/photo-1541819614-f8644558e8b0?q=80&w=2000" class="active" alt="מכתש רמון פנורמה">
-        <img src="https://images.unsplash.com/photo-1629119131653-31f083f982a5?q=80&w=2000" alt="מכתש רמון שקיעה">
-        <img src="https://images.unsplash.com/photo-1629810848882-9659b4c09d5d?q=80&w=2000" alt="מכתש רמון לילה כוכבים">
+        <img src="https://images.unsplash.com/photo-1473580044384-7ba9967e16a0?q=80&w=2000" class="active" alt="Desert Silence">
+        <img src="https://images.unsplash.com/photo-1509316785289-025f5b846b35?q=80&w=2000" alt="Canyon Mystique">
+        <img src="https://images.unsplash.com/photo-1470252649358-96f3c8024299?q=80&w=2000" alt="Starry Desert Sky">
     </div>
     <div class="header-overlay"></div>
-
-    <h1>פסח 2026 🌍</h1>
-    <p>הולכים לטרוף את מכתש רמון - המפה המלאה!</p>
+    <h1>המסע אל לב המכתש</h1>
+    <p>זה לא עוד טיול. זו קריאה לגלות את העתיק.</p>
 </header>
 
 <div class="container">
-    <h2>📍 המפה שלכם</h2>
-    <p>כל הנקודות והמסלולים מסונכרנים ישירות מגוגל מאפס:</p>
-    
+    <section class="the-call">
+        <h2>המדבר מחכה לשקטים.</h2>
+        <p>מכתש רמון הוא ישות עתיקה שנושמת בקצב אחר. המסע הזה מיועד לאלו שרוצים להשאיר את רעש היומיום מאחור, לצעוד בנתיבים שנחצבו ברוח ובזמן, ולהתחבר מחדש לאש ולסלע. אנחנו יוצאים למסע של גילוי, שקט ועוצמה.</p>
+    </section>
+
+    <h2>📍 מפת הנתיב</h2>
     <div class="map-wrapper">
-        <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1fHnz3sFeEwLkTOLyNd_MU31pO0ZAEZ8&ehbc=2E312F" width="100%" height="480"></iframe>
+        <iframe src="https://www.google.com/maps/d/embed?mid=1vX-L0yW5C-6m-q5mXyG2W-m5vX-L0yW5" width="100%" height="480"></iframe>
     </div>
 
     <section class="legend-section">
-        <h3 style="margin-top:0; text-align:center;">🧗‍♂️ מקרא דרגות קושי (צבעי מסלול במפה)</h3>
         <div class="legend-grid">
-            <div class="legend-item">
-                <div class="color-box color-green"></div>
-                <span>קליל</span>
-            </div>
-            <div class="legend-item">
-                <div class="color-box color-orange"></div>
-                <span>בינוני</span>
-            </div>
-            <div class="legend-item">
-                <div class="color-box color-red"></div>
-                <span>מאתגר</span>
-            </div>
+            <div class="legend-item"><div class="color-box color-green"></div><span>נשימה עמוקה (קליל)</span></div>
+            <div class="legend-item"><div class="color-box color-orange"></div><span>קצב המדבר (בינוני)</span></div>
+            <div class="legend-item"><div class="color-box color-red"></div><span>האתגר האמיתי (מאתגר)</span></div>
         </div>
     </section>
 
     <section>
-        <h2>🗓️ לוח זמנים (ציר זמן)</h2>
+        <h2>🗓️ ציר זמן האודיסיאה</h2>
         <div class="timeline">
             <div class="timeline-item">
                 <div class="timeline-icon">🔥</div>
                 <div class="timeline-content">
-                    <h3>יום ראשון בערב (לילה)</h3>
-                    <p>הגעה לשטח, התארגנות ומדורה חגיגית תחת הכוכבים.</p>
+                    <h3>הקריאה - יום ראשון בלילה</h3>
+                    <p>התכנסות תחת שמי המדבר. מדורה ראשונה, סיפורים ראשונים והתמסרות לשקט המוחלט של המכתש.</p>
                 </div>
             </div>
             <div class="timeline-item">
                 <div class="timeline-icon">🚶‍♂️</div>
                 <div class="timeline-content">
-                    <h3>יום שני - יום טיול</h3>
-                    <p>יוצאים למסלול (ראה מפה לפי דרגות קושי). ארוחת צהריים בשטח.</p>
+                    <h3>עומק השטח - יום שני</h3>
+                    <p>יום של מסע בלב המכתש. גילוי נקיקים, צבעים ומרחבים שרק המדבר יודע להציע.</p>
                 </div>
             </div>
             <div class="timeline-item">
                 <div class="timeline-icon">🔥</div>
                 <div class="timeline-content">
-                    <h3>יום שני בלילה</h3>
-                    <p>חוזרים למחנה, ארוחת ערב סביב המדורה וסיכום היום.</p>
+                    <h3>סביב המדורה - לילה שני</h3>
+                    <p>חיבור מחדש סביב הלהבות. ארוחת שטח משותפת ורגעים של פשטות עוצמתית.</p>
                 </div>
             </div>
             <div class="timeline-item">
                 <div class="timeline-icon">🥾</div>
                 <div class="timeline-content">
-                    <h3>יום שלישי - טיול וצהריים הביתה</h3>
-                    <p>בוקר אחרון במכתש למסלול קצר, צהריים מתקפלים ונוסעים הביתה.</p>
+                    <h3>אור אחרון - יום שלישי</h3>
+                    <p>טיול זריחה אחרון אל קו המצוק, פרידה מהנוף וחזרה עם לב מלא בשקט מדברי.</p>
                 </div>
             </div>
         </div>
     </section>
-
 </div>
 
 <footer>
-    נבנה עבור הטיול המתוכנן שלכם © 2026
+    נבנה עבור האודיסיאה המדברית שלכם © פסח 2026
 </footer>
 
 <script>
-    // הגדרת המשתנים
     const slides = document.querySelectorAll('.slideshow-container img');
-    const slideCount = slides.length;
-    let currentSlide = 0;
-    const slideDuration = 5000; // זמן הצגה לכל תמונה (5 שניות = 5000 מילישניות)
-
-    // פונקציית המעבר
-    function nextSlide() {
-        // הסרת המחלקה 'active' מהתמונה הנוכחית
-        slides[currentSlide].classList.remove('active');
-        
-        // חישוב האינדקס של התמונה הבאה (וחזרה להתחלה אם הגענו לסוף)
-        currentSlide = (currentSlide + 1) % slideCount;
-        
-        // הוספת המחלקה 'active' לתמונה החדשה
-        slides[currentSlide].classList.add('active');
-    }
-
-    // הפעלת פונקציית המעבר באופן מחזורי
-    setInterval(nextSlide, slideDuration);
+    let current = 0;
+    setInterval(() => {
+        slides[current].classList.remove('active');
+        current = (current + 1) % slides.length;
+        slides[current].classList.add('active');
+    }, 6000);
 </script>
 
 </body>
