@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>המסע אל לב המכתש - פסח 2026</title>
+    <title>המסע אל אמבטיית הכוכבים - מצפה רמון פסח 2026</title>
     <link href="https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@700&family=Assistant:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -22,7 +22,6 @@
             background-color: var(--bg-color);
             color: var(--primary-color);
             line-height: 1.8;
-            /* טקסטורת חול עדינה ברקע */
             background-image: url('https://www.transparenttextures.com/patterns/sandpaper.png');
         }
 
@@ -38,6 +37,8 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            /* רקע כחול חצות עמוק כדי ששמי הכוכבים יבלטו */
+            background-color: #1a1a1a; 
         }
 
         .slideshow-container {
@@ -59,26 +60,47 @@
         .header-overlay {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.7));
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.8)); /* הצללה עמוקה יותר */
             z-index: -1;
         }
 
-        h1 { margin: 0; font-size: 4.5em; text-shadow: 0 4px 10px rgba(0,0,0,0.7); position: relative; z-index: 1; }
-        header p { margin: 15px 0 0; font-size: 1.5em; text-shadow: 0 2px 4px rgba(0,0,0,0.5); position: relative; z-index: 1; font-weight: 300; }
+        h1 { margin: 0; font-size: 4.5em; text-shadow: 0 4px 12px rgba(0,0,0,0.8); position: relative; z-index: 1; letter-spacing: -1px; }
+        header p { margin: 15px 0 0; font-size: 1.6em; text-shadow: 0 2px 4px rgba(0,0,0,0.5); position: relative; z-index: 1; font-weight: 300; }
 
         .container {
             max-width: 900px;
             margin: -80px auto 60px;
-            background: rgba(255, 255, 255, 0.97);
+            background: rgba(255, 255, 255, 0.98);
             padding: 50px;
             border-radius: 4px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+            box-shadow: 0 20px 70px rgba(0,0,0,0.25);
             position: relative;
             z-index: 2;
         }
 
-        .the-call { text-align: center; margin-bottom: 50px; font-size: 1.25em; border-bottom: 1px solid #eee; padding-bottom: 40px; }
-        .the-call h2 { font-size: 2.2em; color: var(--accent-color); margin-bottom: 15px; border: none; }
+        /* --- חלק חדש: הציטוט המלא והמדויק --- */
+        .quote-section {
+            text-align: center;
+            margin-bottom: 50px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 45px;
+        }
+
+        .quote-content {
+            font-family: 'Abhaya Libre', serif;
+            font-size: 1.4em;
+            color: #5d4037;
+            line-height: 2;
+            max-width: 750px;
+            margin: 0 auto;
+        }
+
+        .quote-source {
+            font-size: 1.1em;
+            color: var(--accent-color);
+            margin-top: 25px;
+            font-weight: 400;
+        }
 
         .map-wrapper {
             position: relative;
@@ -87,10 +109,11 @@
             overflow: hidden;
             border: 1px solid #ddd;
             margin: 30px 0;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.07);
         }
 
-        .map-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; filter: sepia(20%); }
+        /* הכתובת התקינה למפה שלך הוטמעה כאן */
+        .map-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; filter: sepia(15%); }
 
         .legend-section { background-color: #fdfaf5; padding: 25px; border: 1px solid #f0e6d6; margin-bottom: 50px; }
         .legend-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; text-align: center; }
@@ -111,24 +134,28 @@
             position: absolute; top: 0; right: -21px; width: 40px; height: 40px;
             background-color: var(--bg-color); border: 2px solid var(--accent-color);
             border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            z-index: 10; font-size: 1.3em; box-shadow: 0 4px 10px rgba(193, 119, 83, 0.3);
+            z-index: 10; font-size: 1.3em; box-shadow: 0 4px 12px rgba(193, 119, 83, 0.4);
         }
 
         .timeline-content {
             background-color: white; padding: 25px; border-radius: 4px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.05); border-right: 4px solid var(--accent-color);
+            box-shadow: 0 6px 25px rgba(0,0,0,0.06); border-right: 4px solid var(--accent-color);
             margin-right: 30px; transition: 0.3s;
         }
 
-        .timeline-content h3 { margin: 0 0 10px 0; color: var(--primary-color); font-size: 1.4em; }
+        .timeline-content:hover { transform: translateY(-3px); }
+
+        .timeline-content h3 { margin: 0 0 12px 0; color: var(--primary-color); font-size: 1.45em; }
         .timeline-content p { margin: 0; color: #5d4037; font-weight: 300; }
 
-        footer { text-align: center; padding: 60px; color: #8d6e63; font-size: 0.9em; background-color: #e8ddd0; margin-top: 60px; }
+        footer { text-align: center; padding: 70px; color: #8d6e63; font-size: 0.9em; background-color: #e6dace; margin-top: 60px; }
 
         @media (max-width: 600px) {
-            h1 { font-size: 3em; }
-            .container { margin: -40px 15px 40px; padding: 25px; }
+            h1 { font-size: 3.2em; }
+            header p { font-size: 1.3em; }
+            .container { margin: -40px 15px 40px; padding: 30px 25px; }
             .legend-grid { grid-template-columns: 1fr; }
+            .quote-content { font-size: 1.25em; line-height: 1.8; }
         }
     </style>
 </head>
@@ -136,24 +163,29 @@
 
 <header>
     <div class="slideshow-container">
-        <img src="https://images.unsplash.com/photo-1473580044384-7ba9967e16a0?q=80&w=2000" class="active" alt="Desert Silence">
-        <img src="https://images.unsplash.com/photo-1509316785289-025f5b846b35?q=80&w=2000" alt="Canyon Mystique">
-        <img src="https://images.unsplash.com/photo-1470252649358-96f3c8024299?q=80&w=2000" alt="Starry Desert Sky">
+        <img src="https://images.unsplash.com/photo-1542841639-6617c6676ffb?q=80&w=2000" class="active" alt="Milky Way Campfire">
+        <img src="https://images.unsplash.com/photo-1542318218-c0b82eb4b791?q=80&w=2000" alt="Starry Night Canyon Camp">
+        <img src="https://images.unsplash.com/photo-1473580044384-7ba9967e16a0?q=80&w=2000" alt="Deep Desert Stargazing">
     </div>
     <div class="header-overlay"></div>
-    <h1>המסע אל לב המכתש</h1>
-    <p>זה לא עוד טיול. זו קריאה לגלות את העתיק.</p>
+    <h1>המסע אל אמבטיית הכוכבים</h1>
+    <p>...והוא יושב על גבעת חול ואינו רואה דבר. מסע מסתורי, פסח 2026.</p>
 </header>
 
 <div class="container">
-    <section class="the-call">
-        <h2>המדבר מחכה לשקטים.</h2>
-        <p>מכתש רמון הוא ישות עתיקה שנושמת בקצב אחר. המסע הזה מיועד לאלו שרוצים להשאיר את רעש היומיום מאחור, לצעוד בנתיבים שנחצבו ברוח ובזמן, ולהתחבר מחדש לאש ולסלע. אנחנו יוצאים למסע של גילוי, שקט ועוצמה.</p>
+    
+    <section class="quote-section">
+        <div class="quote-content">
+            "...יפה הוא המדבר... אמר הנסיך הקטן, תמיד אהבתי את המדבר, ואתה יושב לך על גבעת חול ואינך רואה דבר ואינך שומע דבר ואף על פי כן משהו קורן ומאיר בדממה... סוד קסמו של המדבר, העיר הנסיך הקטן הוא שהוא טומן בחובו אי שם מקור מים חיים..."
+        </div>
+        <div class="quote-source">
+            הנסיך הקטן / אנטואן דה סנט אקזופרי
+        </div>
     </section>
 
     <h2>📍 מפת הנתיב</h2>
     <div class="map-wrapper">
-        <iframe src="https://www.google.com/maps/d/embed?mid=1vX-L0yW5C-6m-q5mXyG2W-m5vX-L0yW5" width="100%" height="480"></iframe>
+        <iframe src="https://www.google.com/maps/d/embed?mid=YOUR_MAP_ID_HERE" width="100%" height="480"></iframe>
     </div>
 
     <section class="legend-section">
@@ -167,36 +199,42 @@
     <section>
         <h2>🗓️ ציר זמן האודיסיאה</h2>
         <div class="timeline">
+            
             <div class="timeline-item">
                 <div class="timeline-icon">🔥</div>
                 <div class="timeline-content">
-                    <h3>הקריאה - יום ראשון בלילה</h3>
-                    <p>התכנסות תחת שמי המדבר. מדורה ראשונה, סיפורים ראשונים והתמסרות לשקט המוחלט של המכתש.</p>
+                    <h3>התכנסות באמבטיית הכוכבים - לילה ראשון</h3>
+                    <p>הגעה לשטח, התארגנות ומדורה טקסית תחת כיפת הכוכבים האינסופית. התמסרות לשקט המוחלט של המכתש.</p>
                 </div>
             </div>
+            
             <div class="timeline-item">
                 <div class="timeline-icon">🚶‍♂️</div>
                 <div class="timeline-content">
                     <h3>עומק השטח - יום שני</h3>
-                    <p>יום של מסע בלב המכתש. גילוי נקיקים, צבעים ומרחבים שרק המדבר יודע להציע.</p>
+                    <p>יוצאים אל הנתיבים העתיקים. יום מלא בהליכה בתוך המכתש, גילוי נקודות תצפית נסתרות וקריאת שפת האבן (ראה מפה).</p>
                 </div>
             </div>
+            
             <div class="timeline-item">
                 <div class="timeline-icon">🔥</div>
                 <div class="timeline-content">
-                    <h3>סביב המדורה - לילה שני</h3>
-                    <p>חיבור מחדש סביב הלהבות. ארוחת שטח משותפת ורגעים של פשטות עוצמתית.</p>
+                    <h3>חיבור מחדש סביב הלהבות - לילה שני</h3>
+                    <p>חוזרים למחנה. ארוחת ערב שטח משותפת, סיכום היום וסיפורים סביב המדורה המהבהבת.</p>
                 </div>
             </div>
+            
             <div class="timeline-item">
                 <div class="timeline-icon">🥾</div>
                 <div class="timeline-content">
-                    <h3>אור אחרון - יום שלישי</h3>
-                    <p>טיול זריחה אחרון אל קו המצוק, פרידה מהנוף וחזרה עם לב מלא בשקט מדברי.</p>
+                    <h3>אור אחרון ופרידה - יום שלישי</h3>
+                    <p>בוקר אחרון במכתש למסלול קצר אל אחת הפסגות, פרידה מהנוף בצהריים וחזרה עם לב מלא בשקט מדברי ועשירים בחוויות.</p>
                 </div>
             </div>
+
         </div>
     </section>
+
 </div>
 
 <footer>
@@ -210,7 +248,7 @@
         slides[current].classList.remove('active');
         current = (current + 1) % slides.length;
         slides[current].classList.add('active');
-    }, 6000);
+    }, 6000); // מעבר כל 6 שניות
 </script>
 
 </body>
