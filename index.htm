@@ -13,7 +13,7 @@
             --text-on-dark: #fafafa;
             --difficulty-easy: #81c784;   
             --difficulty-medium: #ffb74d; 
-            --difficulty-hard: #e57373;   
+            --difficulty-hard: #e57373;
         }
 
         body {
@@ -111,7 +111,7 @@
             box-shadow: 0 15px 40px rgba(0,0,0,0.07);
         }
 
-        /* המפה שלך עודכנה לקישור הרשמי מהתמונה ששלחת */
+        /* מפת Google My Maps המעודכנת לפי הקישור שלך */
         .map-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
 
         .legend-section { background-color: #fdfaf5; padding: 25px; border: 1px solid #f0e6d6; margin-bottom: 50px; }
@@ -160,8 +160,8 @@
 
 <header>
     <div class="slideshow-container">
-        <img src="https://images.unsplash.com/photo-1542841639-6617c6676ffb?q=80&w=2000" class="active" alt="Milky Way Campfire">
-        <img src="https://images.unsplash.com/photo-1542318218-c0b82eb4b791?q=80&w=2000" alt="Starry Night Canyon">
+        <img src="https://images.unsplash.com/photo-1542841639-6617c6676ffb?q=80&w=2000" class="active" alt="Starry Campfire">
+        <img src="https://images.unsplash.com/photo-1542318218-c0b82eb4b791?q=80&w=2000" alt="Milky Way">
         <img src="https://images.unsplash.com/photo-1473580044384-7ba9967e16a0?q=80&w=2000" alt="Deep Desert Stargazing">
     </div>
     <div class="header-overlay"></div>
@@ -175,16 +175,76 @@
         <div class="quote-content">
             "יפה הוא המדבר... אמר הנסיך הקטן, תמיד אהבתי את המדבר, ואתה יושב לך על גבעת חול ואינך רואה דבר ואינך שומע דבר ואף על פי כן משהו קורן ומאיר בדממה... סוד קסמו של המדבר, העיר הנסיך הקטן הוא שהוא טומן בחובו אי שם מקור מים חיים..."
         </div>
-        <div class="quote-source">
-            הנסיך הקטן / אנטואן דה סנט אקזופרי
-        </div>
+        <div class="quote-source">הנסיך הקטן / אנטואן דה סנט אקזופרי</div>
     </section>
 
-    <h2>📍 מפת הנתיב</h2>
+    <h2>📍מפת המסלולים</h2>
     <div class="map-wrapper">
-        <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1fHnz3sFeXEwLkTOlyNd_MU31p08ZAFZ8&ehbc=2E312F" width="100%" height="480"></iframe>
+        <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1fHnz3SFeEwLkT0LYNd_NU31p08ZAFZ88&ehbc=2E312F" width="100%" height="480"></iframe>
     </div>
 
     <section class="legend-section">
         <div class="legend-grid">
-            <div class="legend-item"><div class="
+            <div class="legend-item"><div class="color-box color-green"></div><span>נשימה עמוקה (קליל)</span></div>
+            <div class="legend-item"><div class="color-box color-orange"></div><span>קצב המדבר (בינוני)</span></div>
+            <div class="legend-item"><div class="color-box color-red"></div><span>האתגר האמיתי (מאתגר)</span></div>
+        </div>
+    </section>
+
+    <section>
+        <h2>🗓️ ציר זמן המסע</h2>
+        <div class="timeline">
+            
+            <div class="timeline-item">
+                <div class="timeline-icon">🔥</div>
+                <div class="timeline-content">
+                    <h3>התכנסות באמבטיית הכוכבים - לילה ראשון</h3>
+                    <p>הגעה לשטח, התארגנות ושתיית יין סביב מדורה אינסופית ורכילות עסיסית. התמסרות לשקט המוחלט של המדבר.</p>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-icon">🚶‍♂️</div>
+                <div class="timeline-content">
+                    <h3>עומק השטח - יום שני</h3>
+                    <p>יוצאים אל הדרך. יום מלא בהליכה, גילוי סוד יופיו של המדבר והתחברות לאדמה (ראו מפה).</p>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-icon">🔥</div>
+                <div class="timeline-content">
+                    <h3>חיבור מחדש סביב הלהבות - לילה שני</h3>
+                    <p>חוזרים למחנה. ארוחת ערב שטח משותפת, סיכום היום וסיפורים סביב המדורה המהבהבת והיין שנשפך.</p>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-icon">🥾</div>
+                <div class="timeline-content">
+                    <h3>אור אחרון ופרידה - יום שלישי</h3>
+                    <p>בוקר אחרון במכתש למסלול קצר אל אחת הפסגות, פרידה מהנוף בצהריים וחזרה אל הציוויליזציה עם לב מלא כוכבים.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+</div>
+
+<footer>
+    נבנה עבור האודיסיאה המדברית שלכם © פסח 2026
+</footer>
+
+<script>
+    const slides = document.querySelectorAll('.slideshow-container img');
+    let current = 0;
+    setInterval(() => {
+        slides[current].classList.remove('active');
+        current = (current + 1) % slides.length;
+        slides[current].classList.add('active');
+    }, 6000);
+</script>
+
+</body>
+</html>
