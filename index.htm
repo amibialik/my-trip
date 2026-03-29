@@ -42,7 +42,8 @@
 
         .slideshow-container {
             position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%; z-index: -2;
+            top: 0; left: 0; width: 100%; height: 100%; 
+            z-index: 1; 
         }
 
         .slideshow-container img {
@@ -51,7 +52,6 @@
             object-fit: cover;
             opacity: 0;
             transition: opacity 2.5s ease-in-out;
-            z-index: -2;
         }
 
         .slideshow-container img.active { opacity: 1; }
@@ -60,11 +60,11 @@
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
             background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.8));
-            z-index: -1;
+            z-index: 2; 
         }
 
-        h1 { margin: 0; font-size: 4.5em; text-shadow: 0 4px 12px rgba(0,0,0,0.8); position: relative; z-index: 1; letter-spacing: -1px; }
-        header p { margin: 15px 0 0; font-size: 1.6em; text-shadow: 0 2px 4px rgba(0,0,0,0.5); position: relative; z-index: 1; font-weight: 300; }
+        h1 { margin: 0; font-size: 4.5em; text-shadow: 0 4px 12px rgba(0,0,0,0.8); position: relative; z-index: 3; letter-spacing: -1px; }
+        header p { margin: 15px 0 0; font-size: 1.6em; text-shadow: 0 2px 4px rgba(0,0,0,0.5); position: relative; z-index: 3; font-weight: 300; }
 
         .container {
             max-width: 900px;
@@ -74,7 +74,7 @@
             border-radius: 4px;
             box-shadow: 0 20px 70px rgba(0,0,0,0.25);
             position: relative;
-            z-index: 2;
+            z-index: 4;
         }
 
         .quote-section {
@@ -109,9 +109,9 @@
             border: 1px solid #ddd;
             margin: 30px 0;
             box-shadow: 0 15px 40px rgba(0,0,0,0.07);
+            background-color: #eee; 
         }
 
-        /* מפת Google My Maps המעודכנת לפי הקישור שלך */
         .map-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
 
         .legend-section { background-color: #fdfaf5; padding: 25px; border: 1px solid #f0e6d6; margin-bottom: 50px; }
@@ -178,9 +178,9 @@
         <div class="quote-source">הנסיך הקטן / אנטואן דה סנט אקזופרי</div>
     </section>
 
-    <h2>📍מפת המסלולים</h2>
+    <h2>📍 המסלולים האפשריים</h2>
     <div class="map-wrapper">
-        <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1fHnz3SFeEwLkT0LYNd_NU31p08ZAFZ88&ehbc=2E312F" width="100%" height="480"></iframe>
+        <iframe src="https://www.google.com/maps/d/embed?mid=1fHnz3sFeEwLkTOLyNd_MU31pO8ZAFZ88" width="100%" height="480"></iframe>
     </div>
 
     <section class="legend-section">
